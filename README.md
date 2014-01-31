@@ -31,7 +31,7 @@ This SDK uses the CPAL license (http://www.opensource.org/licenses/cpal_1.0). Re
 
 Happy game-making with Moai. Check out the [Moai Wiki](http://getmoai.com/wiki/), ping us through the [forums](http://getmoai.com/forums/) or email us at support@getmoai.com if you need help. The Moai team is here to help.
 
-## Project structure: 
+## Project structure:
 
 * 3rdparty - All of the 3rd party libraries we use.
 * ant - Android source and reference projects.
@@ -43,7 +43,13 @@ Happy game-making with Moai. Check out the [Moai Wiki](http://getmoai.com/wiki/)
 * test - Lua unit and stress tests for Moai.
 * vs2008 - Visual Studio 2008 source and reference projects.
 * vs2010 - Visual Studio 2010 source and reference projects.
-* xcode - Mac OSX and iOS source and reference projects. 
+* xcode - Mac OSX and iOS source and reference projects.
+
+## Developing on Linux (64 bit):
+
+Compile Moai by running `./bin/build-linux_x64`. When the process completes successfully, Moai will be available in `./release/linux/x64`.
+
+Depending on your system, you may need to install the following packages (list is from Debian/Ubuntu): `cmake build-essential freeglut3-dev libglew-dev libglu1-mesa-dev libxmu-dev libxi-dev chipmunk-dev libjpeg8-dev libpng-dev libfreetype6-dev liblua5.1-0-dev libjansson-dev libtinyxml-dev libcurl4-openssl-dev zlib1g-dev libexpat1-dev libasound2-dev libvorbis-dev libpulse-dev libssl-dev sqlite3 libsqlite3-dev libexpat-dev libcurl4-openssl-dev`.
 
 ## Developing on Windows:
 
@@ -72,6 +78,6 @@ As Moai is written in C++, we've generally preferred Objective-C++ for our work.
 
 ## Developing for Android:
 
-Run ant/make-host.sh. This will create a new Android host template in the folder ant/untitled-host. Edit the local and global settings files in ant/untitled-host to setup the environment and choose a sample to run - by default it is setup to run ../../samples/anim/anim-basic. 
+Run ant/make-host.sh. This will create a new Android host template in the folder ant/untitled-host. Edit the local and global settings files in ant/untitled-host to setup the environment and choose a sample to run - by default it is setup to run ../../samples/anim/anim-basic.
 
 Use the ant/untitled-host/run-host.sh script in the generated directory to create the Android host once it has been configured. This will create the ant/untitled-host/build directory which contains a full Android project that can be imported into Eclipse and then launches the application onto the default Android emulator or device.
