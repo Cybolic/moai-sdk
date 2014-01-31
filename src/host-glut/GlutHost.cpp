@@ -62,7 +62,7 @@
 #ifdef _WIN32
 
 	#include <glut.h>
-	
+
 	#if MOAI_WITH_FOLDER_WATCHER
 		#include <FolderWatcher-win.h>
 	#endif
@@ -77,7 +77,7 @@
 #ifdef __APPLE__
 
 	#include <OpenGL/OpenGL.h>
-	
+
 	#if MOAI_WITH_FOLDER_WATCHER
 		#include <FolderWatcher-mac.h>
 	#endif
@@ -141,7 +141,7 @@ static void _onKeyDown ( unsigned char key, int x, int y ) {
 	( void )y;
 
 	_updateModifiers ();
-	
+
 	AKUEnqueueKeyboardEvent ( GlutInputDeviceID::DEVICE, GlutInputDeviceSensorID::KEYBOARD, key, true );
 }
 
@@ -151,7 +151,7 @@ static void _onKeyUp ( unsigned char key, int x, int y ) {
 	( void )y;
 
 	_updateModifiers ();
-	
+
 	AKUEnqueueKeyboardEvent ( GlutInputDeviceID::DEVICE, GlutInputDeviceSensorID::KEYBOARD, key, false );
 }
 
@@ -159,13 +159,13 @@ static void _onKeyUp ( unsigned char key, int x, int y ) {
 static void _onSpecialFunc ( int key, int x, int y ) {
 	( void )x;
 	( void )y;
-	
+
 	_updateModifiers ();
 
 	if ( key == GLUT_KEY_F1 ) {
-	
+
 		static bool toggle = true;
-		
+
 		if ( toggle ) {
 			AKUReleaseGfxContext ();
 		}
@@ -174,9 +174,9 @@ static void _onSpecialFunc ( int key, int x, int y ) {
 		}
 		toggle = !toggle;
 	}
-	
+
 	if ( key == GLUT_KEY_F2 ) {
-	
+
 		AKUSoftReleaseGfxResources ( 0 );
 	}
 }
@@ -187,7 +187,7 @@ static void _onMouseButton ( int button, int state, int x, int y ) {
 	( void )y;
 
 	_updateModifiers ();
-	
+
 	switch ( button ) {
 		case GLUT_LEFT_BUTTON:
 			AKUEnqueueButtonEvent ( GlutInputDeviceID::DEVICE, GlutInputDeviceSensorID::MOUSE_LEFT, ( state == GLUT_DOWN ));
@@ -215,7 +215,7 @@ static void _onMouseMove ( int x, int y ) {
 
 //----------------------------------------------------------------//
 static void _onPaint () {
-	
+
 	AKURender ();
 	glutSwapBuffers ();
 }
@@ -224,14 +224,13 @@ static void _onPaint () {
 static void _onReshape( int w, int h ) {
 
 	if ( sExitFullscreen ) {
-	
+
 		w = sWinWidth;
 		h = sWinHeight;
-		
+
 		sExitFullscreen = false;
 	}
 
-	AKUSetScreenSize ( w, h );
 	AKUSetViewSize ( w, h );
 }
 
@@ -242,29 +241,29 @@ static void _onTimer ( int millisec ) {
 	double fSimStep = AKUGetSimStep ();
 	int timerInterval = ( int )( fSimStep * 1000.0 );
 	glutTimerFunc ( timerInterval, _onTimer, timerInterval );
-	
+
 	#if MOAI_HOST_USE_DEBUGGER
         AKUDebugHarnessUpdate ();
     #endif
-	
+
 	AKUUpdate ();
-	
+
 	#if MOAI_HOST_USE_FMOD_EX
 		AKUFmodUpdate ();
 	#endif
-	
+
 	#if MOAI_HOST_USE_FMOD_DESIGNER
 		AKUFmodDesignerUpdate (( float )fSimStep );
 	#endif
-    
-  // if ( sDynamicallyReevaluateLuaFiles ) {    
+
+  // if ( sDynamicallyReevaluateLuaFiles ) {
   //  #ifdef _WIN32
   //    winhostext_Query ();
   //  #elif __APPLE__
   //    FWReloadChangedLuaFiles ();
   //  #endif
   // }
-	
+
 	glutPostRedisplay ();
 }
 
@@ -300,22 +299,22 @@ void _AKUExitFullscreenModeFunc () {
 //----------------------------------------------------------------//
 void _AKUOpenWindowFunc ( const char* title, int width, int height ) {
 
-	
+
 	sWinX = 180;
 	sWinY = 100;
 	sWinWidth = width;
 	sWinHeight = height;
-	
+
 	sWinWidth = width;
 	sWinHeight = height;
-	
+
 	if ( !sHasWindow ) {
 		glutInitDisplayMode ( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
 		glutInitWindowSize ( sWinWidth, sWinHeight );
 		glutInitWindowPosition ( sWinX, sWinY );
 		if (!glutGet(GLUT_DISPLAY_MODE_POSSIBLE))
-		{ 
-		    exit(1); 
+		{
+		    exit(1);
 		}
 		glutCreateWindow ( title );
 		sHasWindow = true;
@@ -326,16 +325,15 @@ void _AKUOpenWindowFunc ( const char* title, int width, int height ) {
 	glutKeyboardFunc ( _onKeyDown );
 	glutKeyboardUpFunc ( _onKeyUp );
 	glutSpecialFunc ( _onSpecialFunc );
-	
+
 	glutMouseFunc ( _onMouseButton );
 	glutMotionFunc ( _onMouseDrag );
 	glutPassiveMotionFunc ( _onMouseMove );
-	
+
 	glutDisplayFunc ( _onPaint );
 	glutReshapeFunc ( _onReshape );
-	
+
 	AKUDetectGfxContext ();
-	AKUSetScreenSize ( width, height );
 
 #ifdef __APPLE__
 	GLint sync = 1;
@@ -367,15 +365,15 @@ static void _cleanup () {
 	// don't call this on windows; atexit conflict with untz
 	// possible to fix?
 	//AKUClearMemPool ();
-	
+
 	#if MOAI_WITH_BOX2D
 		AKUFinalizeBox2D ();
 	#endif
-	
+
 	#if MOAI_WITH_CHIPMUNK
 		AKUFinalizeChipmunk ();
 	#endif
-	
+
 	#if MOAI_WITH_HTTP_CLIENT
 		AKUFinalizeHttpClient ();
 	#endif
@@ -383,7 +381,7 @@ static void _cleanup () {
 	AKUFinalizeUtil ();
 	AKUFinalizeSim ();
 	AKUFinalize ();
-	
+
   // if ( sDynamicallyReevaluateLuaFiles ) {
   //  #ifdef _WIN32
   //    winhostext_CleanUp ();
@@ -443,7 +441,7 @@ int GlutHost ( int argc, char** argv ) {
 			}
 		}
 	}
-	
+
 	//assuming that the last script is the entry point we watch for that directory and its subdirectories
 	#if MOAI_WITH_FOLDER_WATCHER
 		if ( lastScript && sDynamicallyReevaluateLuaFiles ) {
@@ -454,7 +452,7 @@ int GlutHost ( int argc, char** argv ) {
 			#endif
 		}
 	#endif
-	
+
 	if ( sHasWindow ) {
 		glutTimerFunc ( 0, _onTimer, 0 );
 		glutMainLoop ();
@@ -469,14 +467,14 @@ void GlutRefreshContext () {
 		AKUDeleteContext ( context );
 	}
 	AKUCreateContext ();
-	
+
 	AKUInitializeUtil ();
 	AKUInitializeSim ();
-  
+
 	#if MOAI_WITH_BOX2D
 		AKUInitializeBox2D ();
 	#endif
-	
+
 	#if MOAI_WITH_CHIPMUNK
 		AKUInitializeChipmunk ();
 	#endif
@@ -484,11 +482,11 @@ void GlutRefreshContext () {
 	#if MOAI_WITH_FMOD_EX
 		AKUFmodLoad ();
 	#endif
-	
+
 	#if MOAI_WITH_FMOD_DESIGNER
 		AKUFmodDesignerInit ();
 	#endif
-	
+
 	#if MOAI_WITH_LUAEXT
 		AKUExtLoadLuacrypto ();
 		AKUExtLoadLuacurl ();
@@ -496,29 +494,34 @@ void GlutRefreshContext () {
 		AKUExtLoadLuasocket ();
 		AKUExtLoadLuasql ();
 	#endif
-	
+
 	#if MOAI_WITH_HARNESS
 		AKUSetFunc_ErrorTraceback ( _debuggerTracebackFunc );
 		AKUDebugHarnessInit ();
 	#endif
-	
+
 	#if MOAI_WITH_HTTP_CLIENT
 		AKUInitializeHttpClient ();
-	#endif 
+	#endif
 
 	#if MOAI_WITH_PARTICLE_PRESETS
 		ParticlePresets ();
 	#endif
-	
+
 	#if MOAI_WITH_UNTZ
 		AKUInitializeUntz ();
 	#endif
+
+	// Set screen (desktop/device) resolution.
+	int screen_width = glutGet ( GLUT_SCREEN_WIDTH );
+	int screen_height = glutGet ( GLUT_SCREEN_HEIGHT );
+	AKUSetScreenSize ( screen_width, screen_height );
 
 	AKUSetInputConfigurationName ( "AKUGlut" );
 
 	AKUReserveInputDevices			( GlutInputDeviceID::TOTAL );
 	AKUSetInputDevice				( GlutInputDeviceID::DEVICE, "device" );
-	
+
 	AKUReserveInputDeviceSensors	( GlutInputDeviceID::DEVICE, GlutInputDeviceSensorID::TOTAL );
 	AKUSetInputDeviceKeyboard		( GlutInputDeviceID::DEVICE, GlutInputDeviceSensorID::KEYBOARD,		"keyboard" );
 	AKUSetInputDevicePointer		( GlutInputDeviceID::DEVICE, GlutInputDeviceSensorID::POINTER,		"pointer" );
