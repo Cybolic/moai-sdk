@@ -49,7 +49,7 @@ Happy game-making with Moai. Check out the [Moai Wiki](http://getmoai.com/wiki/)
 
 Make sure your system has the required packages installed:
 
-    sudo apt-get install cmake build-essential freeglut3-dev libglew-dev libglu1-mesa-dev libxmu-dev libxi-dev libsdl-dev'.
+    sudo apt-get install cmake build-essential freeglut3-dev libglew-dev libglu1-mesa-dev libxmu-dev libxi-dev libsdl-dev
 
 Compile Moai by running:
 
