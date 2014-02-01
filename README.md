@@ -21,9 +21,6 @@ Answers to frequently asked questions are available in the [Moai FAQ](http://get
 ## Wiki:
 You can find detailed documentation, instructions and other helpful information in the [Moai Wiki](http://getmoai.com/wiki/).
 
-## Moai Cloud:
-You already have a Moai Cloud account which allows you to upload Lua scripts to be hosted and run as web services via the [Moai Cloud Dashboard](http://dashboard.moaicloud.com/).
-
 If you have support questions, post them to the [Moai Cloud Developer Support Forum](http://getmoai.com/forums/moai-cloud-developer-support.html) or check out the [Moai Wiki ](http://getmoai.com/wiki/).
 
 ## License:
@@ -35,8 +32,11 @@ Happy game-making with Moai. Check out the [Moai Wiki](http://getmoai.com/wiki/)
 
 * 3rdparty - All of the 3rd party libraries we use.
 * ant - Android source and reference projects.
+* cmake - Build system for Moai.
 * distribute - The files and set up used to create the SDK installers and other distributable packages.
 * docs - Moai documentation, release notes and attribution images.
+* flascc - Adobe Flash host source.
+* release - The output directory for builds.
 * samples - Lua samples and development test/experiment scripts.
 * scons - Google Chrome source.
 * src - Moai source code and headers.
