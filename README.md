@@ -45,11 +45,22 @@ Happy game-making with Moai. Check out the [Moai Wiki](http://getmoai.com/wiki/)
 * vs2010 - Visual Studio 2010 source and reference projects.
 * xcode - Mac OSX and iOS source and reference projects.
 
-## Developing on Linux (64 bit):
+## Developing on Linux (Ubuntu 64 bit):
 
-Compile Moai by running `./bin/build-linux_x64`. When the process completes successfully, Moai will be available in `./release/linux/x64`.
+Make sure your system has the required packages installed:
 
-Depending on your system, you may need to install the following packages (list is from Debian/Ubuntu): `cmake build-essential freeglut3-dev libglew-dev libglu1-mesa-dev libxmu-dev libxi-dev chipmunk-dev libjpeg8-dev libpng-dev libfreetype6-dev liblua5.1-0-dev libjansson-dev libtinyxml-dev libcurl4-openssl-dev zlib1g-dev libexpat1-dev libasound2-dev libvorbis-dev libpulse-dev libssl-dev sqlite3 libsqlite3-dev libexpat-dev libcurl4-openssl-dev`.
+    sudo apt-get install cmake build-essential freeglut3-dev libglew-dev libglu1-mesa-dev libxmu-dev libxi-dev libsdl-dev'.
+
+Compile Moai by running:
+
+    ./bin/build-linux_x64
+
+When the process completes successfully, Moai will be available in `./release/linux/x64`.
+
+You can test it by running:
+
+    ./release/linux/x64/bin/moai -s 'print("hello world")'
+
 
 ## Developing on Windows:
 
